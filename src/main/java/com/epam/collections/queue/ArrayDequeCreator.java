@@ -1,8 +1,6 @@
 package com.epam.collections.queue;
 
 import java.util.ArrayDeque;
-import java.util.Objects;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class ArrayDequeCreator {
