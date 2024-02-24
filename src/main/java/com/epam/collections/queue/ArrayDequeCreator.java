@@ -5,16 +5,28 @@ import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class ArrayDequeCreator extends PriorityQueue<String> {
+public class ArrayDequeCreator {
+
     public ArrayDeque<Integer> createArrayDeque(Queue<Integer> firstQueue, Queue<Integer> secondQueue) {
-        ArrayDeque<Integer> resultArrayDeque = new ArrayDeque<>();
+        ArrayDeque<Integer> resultDeque = new ArrayDeque<>();
+        resultDeque.addLast(firstQueue.poll());
+        resultDeque.addLast(firstQueue.poll());
+        resultDeque.addLast(secondQueue.poll());
+        resultDeque.addLast(secondQueue.poll());
 
         while (!firstQueue.isEmpty() && !secondQueue.isEmpty()) {
-            resultArrayDeque.add(firstQueue.poll());
-            resultArrayDeque.add(Objects.requireNonNull(secondQueue.poll()));
-            resultArrayDeque.add(Objects.requireNonNull(firstQueue.poll()));
+            firstQueue.add(resultDeque.pollLast());
+            resultDeque.addLast(firstQueue.poll());
+            if(!firstQueue.isEmpty()){
+                resultDeque.addLast(firstQueue.poll());
+            }
+            secondQueue.add(resultDeque.pollLast());
+            resultDeque.addLast(secondQueue.poll());
+            if(!secondQueue.isEmpty()){
+                resultDeque.addLast(secondQueue.poll());
+            }
         }
-
-        return resultArrayDeque;
+        System.out.println(resultDeque);
+        return resultDeque;
     }
 }
